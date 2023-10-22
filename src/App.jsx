@@ -16,36 +16,46 @@ class App extends React.Component {
     }
   }
 
-  handleSubmit = async (event) => {
+  handleCityFormSubmit = async (event) => {
     event.preventDefault();
     console.log('handle submit test')
+    let cityURL = `http://us1.locationiq.com/v1/search?key=${VITE_API_KEY_LOCATION}&q=${this.state.cityName}&format=json`;
+    let cityInfo = await axios.get(URL);
   }
+}
 
-  render() {
-
-
+render() {
+  let cityList = this.state.cityInformation.map((data, index) => {
     return (
-      <>
-        {/* <h1>Enter City Name</h1>
+      <li key={index}>
+        {data.long}
+        {data.lat}
+      </li>
+    )
+  })
+
+  return (
+    <>
+      {/* <h1>Enter City Name</h1>
         <form onSubmit={this.handleSubmit}>
           <button type="submit">Explore!</button>
         </form>
         {this.state.error ? (
           <p>this.state.errorMessage</p>
         ) : (
-          <ul>{CityList}</ul>
+          <ul>{cityList}</ul>
         )} */}
 
-        <form onSubmit={this.handleCityFormSubmit}>
-          <label>
-            Pick a City:
-            <input type="text" onChange={this.handleCityInput} />
-          </label>
-          <button type="submit">Explore!</button>
-        </form >
-      </>
-    );
-  }
+      <form onSubmit={this.handleCityFormSubmit}>
+        <label>
+          Pick a City:
+          <input type="text" onChange={this.handleCityInput} />
+        </label>
+        <button type="submit">Explore!2</button>
+      </form >
+    </>
+  );
 }
+
 
 export default App;
