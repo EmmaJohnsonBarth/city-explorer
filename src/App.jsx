@@ -1,35 +1,51 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
+import React, { useState } from 'react'
+// import reactLogo from './assets/react.svg'
+// import viteLogo from '/vite.svg'
 import './App.css'
+import axios from "axios"
 
-function App() {
-  const [count, setCount] = useState(0)
+const VITE_API_KEY_LOCATION = pk.e66c1e6e75acc1f162522d21124254ac
 
-  return (
-    <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
+class App extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      cityInformation: [],
+      error: false,
+      cityName: "",
+    }
+  }
+
+  handleSubmit = async (event) => {
+    event.preventDefault();
+    console.log('handle submit test')
+  }
+
+  render() {
+
+
+    return (
+      <>
+        {/* <h1>Enter City Name</h1>
+        <form onSubmit={this.handleSubmit}>
+          <button type="submit">Explore!</button>
+        </form>
+        {this.state.error ? (
+          <p>this.state.errorMessage</p>
+        ) : (
+          <ul>{CityList}</ul>
+        )} */}
+
+        <form onSubmit={this.handleCityFormSubmit}>
+          <label>
+            Pick a City:
+            <input type="text" onChange={this.handleCityInput} />
+          </label>
+          <button type="submit">Explore!</button>
+        </form >
+      </>
+    );
+  }
 }
 
-export default App
+export default App;
