@@ -10,7 +10,7 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      cityInformation: [],
+      // cityInformation: [],
       error: false,
       cityName: "",
     }
@@ -19,24 +19,25 @@ class App extends React.Component {
   handleCityFormSubmit = async (event) => {
     event.preventDefault();
     console.log('handle submit test')
-    let cityURL = `http://us1.locationiq.com/v1/search?key=${VITE_API_KEY_LOCATION}&q=${this.state.cityName}&format=json`;
+    let URL = `http://us1.locationiq.com/v1/search?key=${VITE_API_KEY_LOCATION}&q=${this.state.cityName}&format=json`;
     let cityInfo = await axios.get(URL);
   }
-}
 
-render() {
-  let cityList = this.state.cityInformation.map((data, index) => {
-    return (
-      <li key={index}>
-        {data.long}
-        {data.lat}
-      </li>
+
+  render() {
+    let cityList = this.state.cityInformation.map((data, index) => {
+      return (
+        <li key={index}>
+          {data.long}
+          {data.lat}
+        </li>
+      )
+    }
     )
-  })
 
-  return (
-    <>
-      {/* <h1>Enter City Name</h1>
+    return (
+      <>
+        {/* <h1>Enter City Name</h1>
         <form onSubmit={this.handleSubmit}>
           <button type="submit">Explore!</button>
         </form>
@@ -46,16 +47,16 @@ render() {
           <ul>{cityList}</ul>
         )} */}
 
-      <form onSubmit={this.handleCityFormSubmit}>
-        <label>
-          Pick a City:
-          <input type="text" onChange={this.handleCityInput} />
-        </label>
-        <button type="submit">Explore!2</button>
-      </form >
-    </>
-  );
+        <form onSubmit={this.handleCityFormSubmit}>
+          <label>
+            Pick a City:
+            <input type="text" onChange={this.handleCityInput} />
+          </label>
+          <button type="submit">Explore!2</button>
+        </form >
+      </>
+    );
+  }
 }
-
 
 export default App;
