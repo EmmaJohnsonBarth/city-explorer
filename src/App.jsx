@@ -6,12 +6,13 @@ const VITE_API_KEY_LOCATION = import.meta.env.VITE_API_KEY;
 const VITE_SERVER_URL = import.meta.env.VITE_SERVER_URL;
 console.log(VITE_SERVER_URL);
 
+
 class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      // cityInformation: [],
       error: false,
+
       cityName: '',
       location: '',
       lat: '',
@@ -63,7 +64,6 @@ handleWeather = async (lat, lon) => {
     //update state, create a weather component to send state via props to display weather data. 
 
 
-
     // updatestate with the weather
     // from state give the weather to the weather component
    } catch (error) {
@@ -75,11 +75,14 @@ handleWeather = async (lat, lon) => {
     console.log(this.state.lat,  this.state.location);
     return (
       <>
+
         <form onSubmit={this.handleCityFormSubmit}>
+      
           <label>
             Pick a City:
             <input type="text" onChange={this.handleCityInput} />
           </label>
+
           <button type="submit">Explore!2</button>
         </form >
         {this.state.error ? (
@@ -90,9 +93,8 @@ handleWeather = async (lat, lon) => {
           <p>{this.state.lat}</p>
           <p>{this.state.lon}</p>
           </>
+
         )}
-
-
 
           {/* <CitySearch hanlde all the form city/state searching />
           <Component to render the search results />
@@ -105,18 +107,8 @@ handleWeather = async (lat, lon) => {
               <p>description: {day.description}</p>
             </div> */}
 
-
-
-
-
-
-
-
-
-
-
       </>
-    );
+    )
   }
 }
 
