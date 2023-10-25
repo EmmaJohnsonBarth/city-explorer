@@ -52,8 +52,18 @@ class App extends React.Component {
 handleWeather = async (lat, lon) => {
    console.log(lat, lon, 'did we get here?');
    try {
-    //create a url to call server
-    // get weather back
+    //          call server  /   route
+    let weatherFromServer = await axios.get( `${VITE_SERVER_URL}/weather`, {
+      params: {
+        lat: lat,
+        lon: lon,
+        searchQuery: this.state.cityName} 
+    });
+    console.log('weather',weatherFromServer.data);
+    //update state, create a weather component to send state via props to display weather data. 
+
+
+
     // updatestate with the weather
     // from state give the weather to the weather component
    } catch (error) {
