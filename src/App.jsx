@@ -3,23 +3,23 @@ import './App.css'
 import axios from "axios"
 
 const VITE_API_KEY_LOCATION = import.meta.env.VITE_API_KEY;
-const VITE_SERVER_URL = import.meta.env.VITE_SERVER_URL;
-console.log(VITE_SERVER_URL);
+console.log(VITE_API_KEY_LOCATION);
 
+//Check this, is url in .env right?
+const VITE_SERVER_URL = import.meta.env.VITE_SERVER_URL;
+// console.log(VITE_SERVER_URL);
 
 class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       error: false,
-
       cityName: '',
       location: '',
       lat: '',
       lon: '',
     }
   }
-
 
   handleCityInput = (event) => {
     // console.log(event.target.value);
@@ -28,14 +28,12 @@ class App extends React.Component {
     });
   };
 
-
-
   handleCityFormSubmit = async (event) => {
     event.preventDefault();
     // console.log('handle submit test');
     // console.log('we need a city!!!!!',this.state.cityName);
     let URL = `http://us1.locationiq.com/v1/search?key=${VITE_API_KEY_LOCATION}&q=${this.state.cityName}&format=json`;
-    // console.log(URL);
+    console.log('test, url here: ', URL);
     let cityInfo = await axios.get(URL);
     // console.log('from LOCATIOIQ',cityInfo.data[0])
     //update state and then lets create a component 
@@ -58,24 +56,28 @@ handleWeather = async (lat, lon) => {
       params: {
         lat: lat,
         lon: lon,
-        searchQuery: this.state.cityName} 
+        searchQuery: this.state.cityName
+      } 
     });
     console.log('weather',weatherFromServer.data);
     //update state, create a weather component to send state via props to display weather data. 
-
+    const weatherData = weatherFromServer.data;
+    this.setState({
+      weather:weatherData,
+    })
 
     // updatestate with the weather
     // from state give the weather to the weather component
    } catch (error) {
-    console.log(error);
+    // console.log('Error fetching weather data: ', error);
    }
 }
 
   render() {
-    console.log(this.state.lat,  this.state.location);
+    // console.log(this.state.lat,  this.state.location);
     return (
       <>
-
+      <h1> Welcome to City Explore!</h1>
         <form onSubmit={this.handleCityFormSubmit}>
       
           <label>
@@ -83,30 +85,17 @@ handleWeather = async (lat, lon) => {
             <input type="text" onChange={this.handleCityInput} />
           </label>
 
-          <button type="submit">Explore!2</button>
+          <button type="submit">Explore!</button>
         </form >
         {this.state.error ? (
-          <p>this.state.errorMessage</p>
+          `{this.state.errorMessage}`
         ) : (
           <>
           <p>{this.state.location}</p>
           <p>{this.state.lat}</p>
           <p>{this.state.lon}</p>
           </>
-
         )}
-
-          {/* <CitySearch hanlde all the form city/state searching />
-          <Component to render the search results />
-          <Map just a bootstrap img />  <Image src={this.props.img_url} alt={this.props.city} title={this.props.city} rounded fluid />
-
-
-          <Weather />
-              <div key={index}>
-              <p>day: {day.date}</p>
-              <p>description: {day.description}</p>
-            </div> */}
-
       </>
     )
   }
