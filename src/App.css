@@ -40,3 +40,29 @@
 .read-the-docs {
   color: #888;
 }
+
+/* .accordion {
+  color: purple;
+}
+
+.accordion-item {
+  color: red;
+}
+
+.accordion-header {
+  color: green;
+}*/
+
+.accordion-button {
+  color: rgb(99, 99, 99);
+  font-size: 12px;
+}
+
+.accordion-collapse {
+  color: rgb(126, 49, 109);
+  
+}
+
+
+
+
